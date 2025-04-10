@@ -1,21 +1,10 @@
-import { HelloUser } from './HelloUser';
-import { UserCard } from './UserCard';
-import { UserList } from './UserList';
+import { HelloUser } from './components/HelloUser';
+import { UserCard } from './components/UserCard';
+import { UserList } from './components/UserList';
+import { users } from './test-resource/data';
 
 function App() {
   const name = 'Phan Minh Nhật';
-  const users = [
-    {
-      name: 'Phan Minh Nhật',
-      age: 20,
-      job: 'Developer',
-    },
-    {
-      name: 'Nguyễn Văn A',
-      age: 21,
-      job: 'Designer',
-    }
-  ]
   return (
     <div>
       <strong style={{ color: 'red' }}>HelloUser Component:</strong>
@@ -23,9 +12,10 @@ function App() {
       <div>--------------------------------</div>
       <strong style={{ color: 'red' }}>UserCard Component:</strong>
       {
-      users.map((user, i) => (
+      users.map((user) => (
         <UserCard
-          key={i}
+          key={user.id}
+          id={user.id}
           name={user.name}
           age={user.age}
           job={user.job} />
