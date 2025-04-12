@@ -1,7 +1,7 @@
 // import { HelloUser } from './components/HelloUser';
 // import { UserCard } from './components/UserCard';
 // import { UserList } from './components/UserList';
-import { Counter, SumAll } from './components/Counter/Counter';
+import { Counter } from './components/Counter/Counter';
 // import { users } from './test-resource/data';
 import './styles/style.scss';
 
@@ -29,7 +29,6 @@ function App() {
       <div>--------------------------------</div>
       <strong style={{ color: 'red' }}>Counter Component:</strong>
       <Counter/>
-      <SumAll/>
     </div>
   );
 }

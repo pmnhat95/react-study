@@ -1,5 +1,9 @@
 @use '../styles/_variables.scss' as *;
+@use '../styles/_flex.scss' as *;
 
+body {
+  padding: 15px;
+}
 .m-b-sm {
   margin-bottom: 5px;
 }
@@ -11,4 +15,16 @@
 }
 .p-md {
   padding: 8px;
+}
+
+.card {
+  padding: $padding;
+  border: 1px solid $primary-color;
+  border-radius: 12px;
+  margin-bottom: 12px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease;
+  &:hover {
+    transform: scale(1.02);
+  }
 }

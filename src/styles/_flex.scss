@@ -1,0 +1,9 @@
+.flex {
+  display: flex;
+}
+
+@for $i from 1 through 6 {
+  .gap-#{$i * 5} {
+    gap: #{$i * 5}px;
+  }
+}
