@@ -1,7 +1,8 @@
 // import { HelloUser } from './components/HelloUser';
 // import { UserCard } from './components/UserCard';
 // import { UserList } from './components/UserList';
-import { Counter } from './components/Counter/Counter';
+// import { Counter } from './components/Counter/Counter';
+import { LoginStatus } from './components/Login/LoginStatus';
 // import { users } from './test-resource/data';
 import './styles/style.scss';
 
@@ -26,9 +27,12 @@ function App() {
       <div>--------------------------------</div>
       <strong style={{ color: 'red' }}>UserList Component:</strong>
       <UserList users={users} /> */}
-      <div>--------------------------------</div>
+      {/* <div>--------------------------------</div>
       <strong style={{ color: 'red' }}>Counter Component:</strong>
-      <Counter/>
+      <Counter/> */}
+      <div>--------------------------------</div>
+      <strong style={{ color: 'red' }}>LoginStatus Component:</strong>
+      <LoginStatus/>
     </div>
   );
 }
