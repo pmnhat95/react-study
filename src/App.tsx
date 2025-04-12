@@ -1,13 +1,15 @@
-import { HelloUser } from './components/HelloUser';
-import { UserCard } from './components/UserCard';
-import { UserList } from './components/UserList';
-import { users } from './test-resource/data';
+// import { HelloUser } from './components/HelloUser';
+// import { UserCard } from './components/UserCard';
+// import { UserList } from './components/UserList';
+import { Counter, SumAll } from './components/Counter/Counter';
+// import { users } from './test-resource/data';
+import './styles/style.scss';
 
 function App() {
-  const name = 'Phan Minh Nhật';
+  // const name = 'Phan Minh Nhật';
   return (
     <div>
-      <strong style={{ color: 'red' }}>HelloUser Component:</strong>
+      {/* <strong style={{ color: 'red' }}>HelloUser Component:</strong>
       <HelloUser name={name} />
       <div>--------------------------------</div>
       <strong style={{ color: 'red' }}>UserCard Component:</strong>
@@ -23,7 +25,11 @@ function App() {
       )}
       <div>--------------------------------</div>
       <strong style={{ color: 'red' }}>UserList Component:</strong>
-      <UserList users={users} />
+      <UserList users={users} /> */}
+      <div>--------------------------------</div>
+      <strong style={{ color: 'red' }}>Counter Component:</strong>
+      <Counter/>
+      <SumAll/>
     </div>
   );
 }
