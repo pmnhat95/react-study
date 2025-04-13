@@ -1,4 +1,3 @@
-import { useState } from "react";
 import { useForm } from 'react-hook-form';
 
 type UserProps = {
@@ -56,7 +55,7 @@ export function UserForm({ onAddUser, existingUsers }: AddUserProps) {
         {...register('age', validateAge)} />
         {errors.age && <div style={{ color: 'red' }}>{errors.age.message}</div>}
       </div>
-      <button type="submit" disabled={!errors}>Submit</button>
+      <button type="submit">Submit</button>
     </form>
   );
 }
