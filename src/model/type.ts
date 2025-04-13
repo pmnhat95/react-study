@@ -1,10 +1,8 @@
-export type User = {
-  id: number;
+export type UserModel = {
   name: string;
   age: number;
-  job: string;
 };
 
-export type UserList = {
-  users: Array<User>;
+export type UserListModel = {
+  users: Array<UserModel>;
 }
