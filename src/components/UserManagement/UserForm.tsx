@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useForm } from 'react-hook-form';
 
 type UserProps = {
   name: string,
@@ -11,51 +12,51 @@ type AddUserProps = {
 };
 
 export function UserForm({ onAddUser, existingUsers }: AddUserProps) {
-  const [name, setName] = useState('');
-  const [age, setAge] = useState('');
-  // const 
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    reset
+  } = useForm<UserProps>();
 
-  const validateAge = (age: string): boolean => {
-    const ageNumber = Number(age);
-    if (ageNumber <= 0) {
-      alert('Tuổi phải lớn hơn 0');
-      return false;
-    }
-    if (ageNumber > 120) {
-      alert('Tuổi phải lớn quá... Có hong á');
-      return false;
-    }
-    return true;
+  const onSubmit = (data: UserProps) => {
+    console.log('Form data:', data);
+    onAddUser(data);
+    reset(); // clear form after submit
   };
 
-  const validateName = (name: string, existingUsers: UserProps[]) => {
-    if (existingUsers.some((u: UserProps) => u.name.toLowerCase() === name.toLowerCase())) {
-      alert('Tên người dùng đã tồn tại');
-      return false;
+  const validateName = { 
+    required: 'Tên không được để trống',
+    validate: (name: string) => {
+      if (existingUsers.some((u: UserProps) => u.name.toLowerCase() === name.toLowerCase().trim())) {
+        return 'Tên người dùng đã tồn tại';
+      }
+      return true;
     }
-    return true;
   };
-  
-  const handleSubmit = (event: React.FormEvent): void => {
-    event.preventDefault();
-    if (!name || !age || !validateAge(age) || !validateName(name, existingUsers)) return;
-    onAddUser({ name, age: Number(age) });
-    setName('');
-    setAge('');
+
+  const validateAge = {
+    required: 'Tuổi là bắt buộc',
+    min: { value: 1, message: 'Tuổi phải > 0' },
+    max: { value: 120, message: 'Anh không phải người bất tử 😄' }
   };
- 
+
   return (
-    <form className="card" onSubmit={ handleSubmit }>
+    <form className="card" onSubmit={ handleSubmit(onSubmit) }>
       <div className="m-b-md">
         <div className="m-b-sm">Name: </div>
-        <input placeholder="Name" value={name} onChange={e => setName(e.target.value)} />
+        <input placeholder="Name"
+        {...register('name', validateName)} />
+        {errors.name && <div style={{ color: 'red' }}>{errors.name.message}</div>}
       </div>
       
       <div className="m-b-md">
         <div className="m-b-sm">Age:</div>
-        <input type="number" placeholder="Age" value={age} onChange={e => setAge(e.target.value)} />
+        <input type="number" placeholder="Age" 
+        {...register('age', validateAge)} />
+        {errors.age && <div style={{ color: 'red' }}>{errors.age.message}</div>}
       </div>
-      <button type="submit" disabled={!name || !age}>Submit</button>
+      <button type="submit" disabled={!errors}>Submit</button>
     </form>
   );
 }
