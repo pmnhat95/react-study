@@ -37,6 +37,8 @@ export function UserFetcher() {
         style={{ marginBottom: '16px', padding: '8px' }}
       />
       <ul>
+        {filteredUsers.length > 0 && <p>Đã tìm thấy {filteredUsers.length} người dùng</p>}
+        
         {filteredUsers.map(user => (
           <li key={user.id} style={{ marginBottom: '8px' }}>
             <strong>{user.name}</strong> - {user.email}
