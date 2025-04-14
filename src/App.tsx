@@ -3,17 +3,18 @@
 // import { Counter } from './components/Counter/Counter';
 // import { LoginStatus } from './components/Login/LoginStatus';
 import { useState } from 'react';
-import { UserForm } from './components/UserManagement/UserForm';
-import { UserList } from './components/UserManagement/UserList';
-import { UserModel } from './model/type';
+// import { UserForm } from './components/UserManagement/UserForm';
+// import { UserList } from './components/UserManagement/UserList';
+// import { UserModel } from './model/type';
 import './styles/style.scss';
+import { UserFetcher } from './components/UserManagement/UserFetcher';
 
 function App() {
   // const name = 'Phan Minh Nhật';
-  const [users, setUsers] = useState<UserModel[]>([]);
-  const handleAddUser = (user: UserModel) => {
-    setUsers(prev => [...prev, user]);
-  };
+  // const [users, setUsers] = useState<UserModel[]>([]);
+  // const handleAddUser = (user: UserModel) => {
+  //   setUsers(prev => [...prev, user]);
+  // };
   return (
     <div>
       {/* <strong style={{ color: 'red' }}>HelloUser Component:</strong>
@@ -39,12 +40,15 @@ function App() {
       {/* <div>--------------------------------</div>
       <strong style={{ color: 'red' }}>LoginStatus Component:</strong>
       <LoginStatus/> */}
-      <div>--------------------------------</div>
+      {/* <div>--------------------------------</div>
       <strong style={{ color: 'red' }}>UserManagement UserForm Component:</strong>
       <UserForm onAddUser={handleAddUser} existingUsers={users}/>
       <div>--------------------------------</div>
       <strong style={{ color: 'red' }}>UserManagement UserList Component:</strong>
-      <UserList users={users} />
+      <UserList users={users} /> */}
+      <div>--------------------------------</div>
+      <strong style={{ color: 'red' }}>UserFetcher Component:</strong>
+      <UserFetcher/>
     </div>
   );
 }
