@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { useNavigate } from "react-router-dom";
 
 type NoteProps = {
@@ -10,6 +10,7 @@ export default function Navbar() {
   const [ notes, setNotes ] = useState<NoteProps[]>([]);
   const [ search, setSearch ] = useState('');
   const [ results, setResults ] = useState<NoteProps[]>([]);
+  const wrapperRef = useRef<HTMLDivElement>(null);
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -35,6 +36,19 @@ export default function Navbar() {
     setResults(filtered);
   }, [search, notes]);
 
+  useEffect(() => {
+    const handleClickOutside = (e: MouseEvent) => {
+      if (wrapperRef.current && !wrapperRef.current.contains(e.target as Node)) {
+        setSearch('');
+        setResults([]);
+      }
+    }
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    }
+  });
+
   const handleSelect = (id: string) => {
     setSearch('');
     setResults([]);
@@ -42,10 +56,16 @@ export default function Navbar() {
   };
 
   return (
-    <div style={{ width: '100%' }}>
+    <div ref={wrapperRef} style={{ width: '100%' }}>
       <input placeholder="Tìm ghi chú..."
         value={search}
         onChange={(e) => setSearch(e.target.value)}
+        onKeyDown={(e) => {
+          if (e.key === 'Enter' && results.length > 0) {
+            e.preventDefault();
+            handleSelect(results[0].id)
+          }
+        }}
         style={{
           padding: 8,
           width: 260,
