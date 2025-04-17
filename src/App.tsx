@@ -1,55 +1,40 @@
-// import { HelloUser } from './components/HelloUser';
-// import { UserCard } from './components/UserCard';
-// import { Counter } from './components/Counter/Counter';
-// import { LoginStatus } from './components/Login/LoginStatus';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
 import { useState } from 'react';
-// import { UserForm } from './components/UserManagement/UserForm';
-// import { UserList } from './components/UserManagement/UserList';
-// import { UserModel } from './model/type';
+import LoginPage from './pages/LoginPage';
+import HomePage from './pages/HomePage';
+import NoteDetailPage from './pages/NoteDetailPage';
+import AddNotePage from './pages/AddNotePage';
+import AppLayout from './layout/AppLayout';
+
 import './styles/style.scss';
-import { UserFetcher } from './components/UserManagement/UserFetcher';
 
 function App() {
-  // const name = 'Phan Minh Nhật';
-  // const [users, setUsers] = useState<UserModel[]>([]);
-  // const handleAddUser = (user: UserModel) => {
-  //   setUsers(prev => [...prev, user]);
-  // };
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
+
   return (
-    <div>
-      {/* <strong style={{ color: 'red' }}>HelloUser Component:</strong>
-      <HelloUser name={name} />
-      <div>--------------------------------</div>
-      <strong style={{ color: 'red' }}>UserCard Component:</strong>
-      {
-      users.map((user) => (
-        <UserCard
-          key={user.id}
-          id={user.id}
-          name={user.name}
-          age={user.age}
-          job={user.job} />
-        )
-      )}
-      <div>--------------------------------</div>
-      <strong style={{ color: 'red' }}>UserList Component:</strong>
-      <UserList users={users} /> */}
-      {/* <div>--------------------------------</div>
-      <strong style={{ color: 'red' }}>Counter Component:</strong>
-      <Counter/> */}
-      {/* <div>--------------------------------</div>
-      <strong style={{ color: 'red' }}>LoginStatus Component:</strong>
-      <LoginStatus/> */}
-      {/* <div>--------------------------------</div>
-      <strong style={{ color: 'red' }}>UserManagement UserForm Component:</strong>
-      <UserForm onAddUser={handleAddUser} existingUsers={users}/>
-      <div>--------------------------------</div>
-      <strong style={{ color: 'red' }}>UserManagement UserList Component:</strong>
-      <UserList users={users} /> */}
-      <div>--------------------------------</div>
-      <strong style={{ color: 'red' }}>UserFetcher Component:</strong>
-      <UserFetcher/>
-    </div>
+    <Router>
+      <Routes>
+        <Route
+          path="/login"
+          element={<LoginPage onLoginSuccess={() => setIsAuthenticated(true)} />}
+        />
+
+        {isAuthenticated ? (
+          <Route path="/app" element={<AppLayout />}>
+            <Route index element={<HomePage />} />
+            <Route path="add" element={<AddNotePage />} />
+            <Route path="note/:id" element={<NoteDetailPage />} />
+          </Route>
+        ) : (
+          <Route path="/app/*" element={<Navigate to="/login" replace />} />
+        )}
+
+        <Route
+          path="*"
+          element={<Navigate to={isAuthenticated ? '/app' : '/login'} replace />}
+        />
+      </Routes>
+    </Router>
   );
 }
 
