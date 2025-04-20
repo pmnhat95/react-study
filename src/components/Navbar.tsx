@@ -31,7 +31,7 @@ export default function Navbar() {
       return;
     }
     const filtered = notes.filter(
-      note => note.title.toLocaleLowerCase().includes(search.toLocaleLowerCase())
+      note => note.title.toLocaleLowerCase().includes(search.trim().toLocaleLowerCase())
     ).slice(0, 4);  // tối đa 4 kết quả
     setResults(filtered);
   }, [search, notes]);

@@ -1,9 +1,19 @@
-import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { useParams, useNavigate } from "react-router-dom";
 
-export default function AddNotePage() {
+type NoteProps = {
+  id: string;
+  title: string;
+  content: string;
+  createdAt: string;
+};
+
+export default function EditNotePage() {
+  const { id } = useParams();
   const [title, setTitle] = useState('');
   const [content, setContent] = useState('');
+  const [note, setNote] = useState<NoteProps | null>(null);
+
   const navigate = useNavigate();
   const buttonStyle: React.CSSProperties = {
     padding: 10,
@@ -18,23 +28,38 @@ export default function AddNotePage() {
     backgroundColor: '#2563eb',
   };
 
-  const handleAddNote = () => {
+  useEffect(() => {
+    const data = localStorage.getItem('notes');
+    if(data) {
+      const notes: NoteProps[] = JSON.parse(data);
+      const foundNote = notes.find(note => note.id === id);
+      if (foundNote) {
+        setNote(foundNote || null);
+        setTitle(foundNote.title);
+        setContent(foundNote.content);
+      }
+    } else {
+      setNote(null);
+    }
+  }, [id]);
+
+  const handleUpdateNote = () => {
     if (!title || !content) return alert('Vui lòng nhập đầy đủ tiêu đề và nội dung');
 
-    const newNote = {
-      id: Date.now().toString(),
-      title,
-      content,
-      createdAt: new Date().toISOString()
-    };
-
-    const prevNotes = JSON.parse(localStorage.getItem('notes') || '[]');
-    localStorage.setItem('notes', JSON.stringify([...prevNotes, newNote]));
-    navigate('/app');
+    const newNotes = JSON.parse(localStorage.getItem('notes') || '[]').map((note: any) =>
+      note.id === id ? { ...note, title, content } : note
+    );
+    localStorage.setItem('notes', JSON.stringify(newNotes));
+    navigate(`/app/note/${id}`);
   };
+
+  if (!note) {
+    return <p style={{color: 'red'}}>Không tìm thấy ghi chú</p>
+  }
+
   return (
     <div style={{ maxWidth: 600 }}>
-      <h2>Thêm ghi chú mới</h2>
+      <h2>Cập nhật lại note <strong>"{note.title}"</strong></h2>
       <input
         placeholder="Tiêu đề"
         value={title}
@@ -64,14 +89,14 @@ export default function AddNotePage() {
         }}
       />
       <button
-        onClick={handleAddNote}
+        onClick={handleUpdateNote}
         disabled={!title.trim().length || !content.trim().length}
         style={{
           ...buttonStyle,
           ...(title.trim().length && content.trim().length ? activeStyle : {})
         }}
       >
-        Thêm ghi chú
+        Cập nhật ghi chú
       </button>
     </div>
   )
