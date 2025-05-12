@@ -8,6 +8,7 @@ import NoteDetailPage from './pages/NoteDetailPage';
 import AddNotePage from './pages/AddNotePage';
 import EditNotePage from './pages/EditNotePage';
 import AppLayout from './layout/AppLayout';
+import { ThemeProvider } from './context/ThemeContext';
 
 import './styles/style.scss';
 
@@ -15,7 +16,7 @@ function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
 
   return (
-    <>
+    <ThemeProvider>
       <Router>
         <Routes>
           <Route
@@ -41,7 +42,7 @@ function App() {
         </Routes>
       </Router>
       <ToastContainer />
-    </>
+    </ThemeProvider>
   );
 }
 

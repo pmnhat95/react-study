@@ -1,6 +1,82 @@
 .flex {
   display: flex;
 }
+.flex-wrap {
+  flex-wrap: wrap
+}
+
+.flex-center {
+  justify-content: center
+}
+
+.flex-start {
+  justify-content: flex-start
+}
+
+.flex-end {
+  justify-content: flex-end
+}
+
+.flex-space-between {
+  justify-content: space-between
+}
+
+.flex-space-evenly {
+  justify-content: space-evenly
+}
+
+.flex-space-around {
+  justify-content: space-around
+}
+
+.flex-middle,.content-header {
+  align-items: center
+}
+
+.flex-stretch {
+  align-items: stretch
+}
+
+.flex-baseline {
+  align-items: baseline
+}
+
+.flex-align-items-end {
+  align-items: flex-end
+}
+
+.flex-align-items-center {
+  align-items: center
+}
+
+.flex-align-content-start {
+  align-content: flex-start
+}
+
+.flex-align-content-end {
+  align-content: flex-end
+}
+
+.flex-align-content-center {
+  align-content: center
+}
+
+.flex-align-content-stretch {
+  align-content: stretch
+}
+
+.flex-align-content-space-between {
+  align-content: space-between
+}
+
+.flex-align-content-space-around {
+  align-content: space-around
+}
+
+.flex-equal-width {
+  flex-grow: 1;
+  flex-basis: 0
+}
 
 @for $i from 1 through 6 {
   .gap-#{$i * 5} {

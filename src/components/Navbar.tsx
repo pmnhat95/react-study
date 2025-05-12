@@ -79,7 +79,6 @@ export default function Navbar() {
           position: 'absolute',
           background: 'white',
           boxShadow: '0 4px 8px rgba(0,0,0,0.1)',
-          borderRadius: 8,
           marginTop: 4,
           width: 260,
           zIndex: 10,
