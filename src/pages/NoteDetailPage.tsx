@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { toast } from "react-toastify";
 
 type NoteProps = {
   id: string;
@@ -19,6 +20,7 @@ export default function NoteDetailPage() {
       if (!data) return;
       const newNotes = JSON.parse(data).filter((note: NoteProps) => note.id !== id);
       localStorage.setItem('notes', JSON.stringify(newNotes));
+      toast.success('Xoá thành công!');
       navigate('/app');
     }
   };

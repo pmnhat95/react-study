@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import { toast } from 'react-toastify';
 
 type NoteProps = {
   id: string;
@@ -40,6 +41,7 @@ export default function EditNotePage() {
       }
     } else {
       setNote(null);
+      toast.error('Ghi chú không tồn tại!');
     }
   }, [id]);
 
@@ -50,6 +52,7 @@ export default function EditNotePage() {
       note.id === id ? { ...note, title, content } : note
     );
     localStorage.setItem('notes', JSON.stringify(newNotes));
+    toast.success('Cập nhật thành công!');
     navigate(`/app/note/${id}`);
   };
 
