@@ -13,9 +13,13 @@ export default function AppLayout() {
   };
   
   return (
-    <div style={{ display: 'flex', height: '100vh' }}>
+    <div style={{ 
+      display: 'flex',
+      height: '100vh', 
+      backgroundColor: theme === 'dark' ? '#0f172a' : '#f8fafc',
+      color: theme === 'dark' ? '#bb86fc' : '#000', }}>
       {/* Sidebar */}
-      <div style={{ width: 220, background: theme === 'dark' ? '#1e293b': '#939ba4', color: 'white', padding: 16, position: "relative" }}>
+      <div style={{ width: 220, background: theme === 'dark' ? '#000': '#939ba4', padding: 16, position: "relative" }}>
         <Sidebar />
         <select 
           value={theme} 
@@ -27,7 +31,7 @@ export default function AppLayout() {
         </select>
       </div>
       {/* Main content */}
-      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', background: theme === 'dark' ? 'gray': 'white' }}>
+      <div style={{ flex: 1, display: 'flex', flexDirection: 'column', background: theme === 'dark' ? '#181717': 'white' }}>
         {/* Navbar */}
         <div style={{ height: 60, borderBottom: '1px solid #ddd', padding: '0 20px', display: 'flex', alignItems: 'center' }}>
           <Navbar />
